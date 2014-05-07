@@ -51,16 +51,27 @@ return array(
             'admin-form-categoria' => 'Admin\Factory\Categoria',
             'admin-form-usuario' => 'Admin\Factory\Usuario',
             'admin-form-perfil' => 'Admin\Factory\Perfil',
+            'admin-form-produto' => 'Admin\Factory\Produto',
         ),
         'invokables' => array(
             //FILTERS
             'admin-filter-categoria' => 'Admin\Filter\Categoria',
             'admin-filter-usuario' => 'Admin\Filter\Usuario',
             'admin-filter-perfil' => 'Admin\Filter\Perfil',
+            'admin-filter-resource' => 'Admin\Filter\Resource',
+            'admin-filter-atributo' => 'Admin\Filter\Atributo',
+            'admin-filter-produto' => 'Admin\Filter\Produto',
             //SERVICES
             'admin-service-categoria' => 'Admin\Service\Categoria',
             'admin-service-usuario' => 'Admin\Service\Usuario',
             'admin-service-perfil' => 'Admin\Service\Perfil',
+            'admin-service-resource' => 'Admin\Service\Resource',
+            'admin-service-atributo' => 'Admin\Service\Atributo',
+            'admin-service-produto' => 'Admin\Service\Produto',
+            //FORMS
+            'admin-form-resource' => 'Admin\Form\Resource',
+            'admin-form-atributo' => 'Admin\Form\Atributo',
+            
         ),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -84,6 +95,9 @@ return array(
             'Admin\Controller\Categoria' => 'Admin\Controller\CategoriaController',
             'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
             'Admin\Controller\Perfil' => 'Admin\Controller\PerfilController',
+            'Admin\Controller\Resource' => 'Admin\Controller\ResourceController',
+            'Admin\Controller\Atributo' => 'Admin\Controller\AtributoController',
+            'Admin\Controller\Produto' => 'Admin\Controller\ProdutoController',
         ),
     ),
     'doctrine' => array(

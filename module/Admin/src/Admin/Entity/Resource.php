@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Resource
  *
  * @ORM\Table(name="resource", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Admin\Repository\Resource")
  */
 class Resource
 {
@@ -29,12 +29,12 @@ class Resource
     private $nome;
 
     public function __construct(array $data) {
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         $hydrator->hydrate($data, $this);
     }
 
     public function toArray() {
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         return $hydrator->extract($this);
     }
     

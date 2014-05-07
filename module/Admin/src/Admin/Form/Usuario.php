@@ -19,9 +19,9 @@ class Usuario extends Form{
         
         $arrPerfil = array('0' => 'Selecione...'); 
         
-        $repoPerfil = $em->getRepository('Admin\Entity\Usuario'); 
-        $arrPerfil += $repoPerfil->findPairs();
-            
+        $repoPerfil = $em->getRepository('Admin\Entity\Perfil'); 
+        $arrPerfil += $repoPerfil->findPairs();   
+      
         $perfil = new Select('perfil');
         $perfil->setLabel('Perfil')
                 ->setAttributes(array(

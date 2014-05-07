@@ -2,13 +2,18 @@
 
 namespace Admin\Entity;
 
+
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 /**
  * Produto
  *
  * @ORM\Table(name="produto", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_produto_usuario1_idx", columns={"usuario_id"}), @ORM\Index(name="fk_produto_categoria1_idx", columns={"categoria_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Admin\Repository\Produto")
  */
 class Produto
 {
@@ -64,14 +69,14 @@ class Produto
     private $ativo;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dta_inc", type="datetime", nullable=false)
      */
     private $dtaInc;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dta_upd", type="datetime", nullable=false)
      */
@@ -98,7 +103,7 @@ class Produto
     private $categoria;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Atributo", inversedBy="produto")
      * @ORM\JoinTable(name="produto_atributo",
@@ -117,13 +122,13 @@ class Produto
      */
     public function __construct(array $data)
     {
-        $this->atributo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->atributo = new ArrayCollection();
         $hydrator = new ClassMethods();
         $hydrator->hydrate($data, $this);
     }
 
     public function toArray() {
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         return $hydrator->extract($this);
     }
     
@@ -203,23 +208,23 @@ class Produto
         $this->ativo = $ativo;
     }
 
-    public function setDtaInc(\DateTime $dtaInc) {
-        $this->dtaInc = $dtaInc;
+    public function setDtaInc() {
+        $this->dtaInc = new DateTime('now');
     }
 
-    public function setDtaUpd(\DateTime $dtaUpd) {
-        $this->dtaUpd = $dtaUpd;
+    public function setDtaUpd() {
+        $this->dtaUpd = new DateTime('now');
     }
 
-    public function setUsuario(\Usuario $usuario) {
+    public function setUsuario(Usuario $usuario) {
         $this->usuario = $usuario;
     }
 
-    public function setCategoria(\Categoria $categoria) {
+    public function setCategoria(Categoria $categoria) {
         $this->categoria = $categoria;
     }
 
-    public function setAtributo(\Doctrine\Common\Collections\Collection $atributo) {
+    public function setAtributo(Collection $atributo) {
         $this->atributo = $atributo;
     }
 

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Atributo
  *
  * @ORM\Table(name="atributo")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Admin\Repository\Atributo")
  */
 class Atributo
 {
@@ -29,9 +29,9 @@ class Atributo
     private $nome;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="tipo_selecao", type="boolean", nullable=false)
+     * @ORM\Column(name="tipo_selecao", type="integer", nullable=false)
      */
     private $tipoSelecao;
 
@@ -48,9 +48,16 @@ class Atributo
     public function __construct(array $data)
     {
         $this->produto = new \Doctrine\Common\Collections\ArrayCollection();
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         $hydrator->hydrate($data, $this);
     }
+    
+     public function toArray() {
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
+        return $hydrator->extract($this);
+    }
+    
+    
     public function getId() {
         return $this->id;
     }

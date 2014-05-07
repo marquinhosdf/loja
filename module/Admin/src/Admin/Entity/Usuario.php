@@ -2,6 +2,9 @@
 
 namespace Admin\Entity;
 
+
+use DateTime;
+use Zend\Crypt\Password\Bcrypt;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,7 +60,7 @@ class Usuario
     private $status;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dta_inc", type="datetime", nullable=false)
      */
@@ -74,12 +77,13 @@ class Usuario
     private $perfil;
     
         public function __construct(array $data) {
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         $hydrator->hydrate($data, $this);
+        
     }
 
     public function toArray() {
-        $hydrator = new ClassMethods();
+        $hydrator = new \Zend\Stdlib\Hydrator\ClassMethods();
         return $hydrator->extract($this);
     }
     
@@ -95,9 +99,9 @@ class Usuario
         return $this->email;
     }
 
-    public function getSenha() {
-        return $this->senha;
-    }
+//    public function getSenha() {
+//        return $this->senha;
+//    }
 
     public function getToken() {
         return $this->token;
@@ -128,7 +132,7 @@ class Usuario
     }
 
     public function setSenha($senha) {
-        $this->senha = $senha;
+        $this->senha = $this->criptSenha($senha);
     }
 
     public function setToken($token) {
@@ -139,15 +143,22 @@ class Usuario
         $this->status = $status;
     }
 
-    public function setDtaInc(\DateTime $dtaInc) {
-        $this->dtaInc = $dtaInc;
+    public function setDtaInc() {
+        $this->dtaInc = new DateTime('now');
     }
 
-    public function setPerfil(\Perfil $perfil) {
+    public function setPerfil(Perfil $perfil) {
         $this->perfil = $perfil;
     }
 
 
-
+    public function criptSenha($senha) {
+        
+        $bcript = new Bcrypt();
+        $bcript->setCost('14');
+        
+        return $bcript->create($senha);
+        
+    }
 
 }

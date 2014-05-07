@@ -92,5 +92,14 @@ abstract class AbstractService implements ServiceLocatorAwareInterface {
 
         return $strValor;
     }
+    
+    public function getToken()
+    {
+        return md5(microtime());
+    }
+    
+    public function getIdUsuario(){
+        return 1;
+    }
 
 }

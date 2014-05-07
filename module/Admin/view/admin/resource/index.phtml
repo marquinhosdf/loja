@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="<?php echo $this->url('admin/default', array('controller' => $controller, 'action' => 'cadastrar')); ?>" class="btn btn-primary">Novo Usuário</a>
+        <a href="<?php echo $this->url('admin/default', array('controller' => $controller, 'action' => 'cadastrar')); ?>" class="btn btn-primary">Novo Resource</a>
     </div>
 
     <div class="panel-body">
@@ -9,33 +9,14 @@
                 <thead>
                     <tr>
                         <td>ID</td>
-                        <td>Perfil</td>
                         <td>Nome</td>
-                        <td>E-mail</td>
-                        <td>Status</td>
                         <td>Opções</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><input type="text" name="id" value="<?php echo isset($filtro['id']) ? $filtro['id'] : "" ?>"></td>
-                        <td>
-                            <select name="perfil">
-                                <option value="">---</option>
-                                <?php foreach ($perfil as $item): ?>
-                                    <option value="<?php echo $item->getId() ?>" <?php echo $filtro['perfil'] == $item->getId() ? "selected" : "" ?>> <?php echo $item->getNome() ?></option>   
-                                <?php endforeach; ?>
-                            </select>
-                        </td>
                         <td><input type="text" name="nome" value="<?php echo isset($filtro['id']) ? $filtro['nome'] : "" ?>"></td>
-                        <td><input type="text" name="email" value="<?php echo isset($filtro['id']) ? $filtro['email'] : "" ?>"></td>
-                        <td>
-                            <select name="status">
-                                <option value="">---</option>
-                                <option value="1" <?php echo $filtro['status'] == 1   ? "selected" : "" ?>>Ativo</option>
-                                <option value="0" <?php echo $filtro['status'] == 0 ? "selected" : "" ?>> Inativo</option>                         
-                            </select>
-                        </td>
                         <td>
                             <input class="btn" type="submit" value="filtrar">
                         </td>
@@ -46,10 +27,7 @@
                             ?>
                             <tr>
                                 <td><?php echo $item->getId() ?></td>
-                                <td><?php echo $item->getPerfil()->getNome()?></td>
                                 <td><?php echo $item->getNome() ?></td>
-                                <td><?php echo $item->getEmail() ?></td>
-                                <td><?php echo $item->getStatus() ?></td>
                                 <td>
                                     <a href="<?php echo $this->url('admin/default', array('controller' => $controller, 'action' => 'editar', 'id' => $item->getId())) ?>"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <a href="<?php echo $this->url('admin/default', array('controller' => $controller, 'action' => 'delete', 'id' => $item->getId())) ?>" onClick="return confirm('Deseja Excluir ?')"><i class="glyphicon glyphicon-remove"></i></a>
